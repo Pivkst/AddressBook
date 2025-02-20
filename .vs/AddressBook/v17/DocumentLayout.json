@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\C#\\AddressBook\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|d:\\projects\\c#\\addressbook\\controllers\\contactdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|solutionrelative:controllers\\contactdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|d:\\projects\\c#\\addressbook\\data\\contactmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|solutionrelative:data\\contactmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|d:\\projects\\c#\\addressbook\\controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|solutionrelative:controllers\\contactcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\C#\\AddressBook\\Migrations\\20250220121212_StringPhoneNumbers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20250220121212_StringPhoneNumbers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|d:\\projects\\c#\\addressbook\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|solutionrelative:readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|d:\\projects\\c#\\addressbook\\data\\addressbookdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|solutionrelative:data\\addressbookdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|d:\\projects\\c#\\addressbook\\addressbook.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|solutionrelative:addressbook.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|d:\\projects\\c#\\addressbook\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79211F38-5795-4649-BD1A-08E11FC21C70}|AddressBook.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20250220121212_StringPhoneNumbers.cs",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\Migrations\\20250220121212_StringPhoneNumbers.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250220121212_StringPhoneNumbers.cs",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\Migrations\\20250220121212_StringPhoneNumbers.cs",
+              "RelativeToolTip": "Migrations\\20250220121212_StringPhoneNumbers.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T12:12:12.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AddressBookDbContext.cs",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\Data\\AddressBookDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AddressBookDbContext.cs",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\Data\\AddressBookDbContext.cs",
+              "RelativeToolTip": "Data\\AddressBookDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-19T22:56:31.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ReadMe.txt",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\ReadMe.txt",
+              "RelativeDocumentMoniker": "ReadMe.txt",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\ReadMe.txt",
+              "RelativeToolTip": "ReadMe.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-02-19T19:50:59.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AddressBook.http",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\AddressBook.http",
+              "RelativeDocumentMoniker": "AddressBook.http",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\AddressBook.http",
+              "RelativeToolTip": "AddressBook.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-02-19T19:48:52.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ContactDTO.cs",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\Controllers\\ContactDTO.cs",
+              "RelativeDocumentMoniker": "Controllers\\ContactDTO.cs",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\Controllers\\ContactDTO.cs",
+              "RelativeToolTip": "Controllers\\ContactDTO.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAwwCwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T12:59:09.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ContactController.cs",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\Controllers\\ContactController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ContactController.cs",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\Controllers\\ContactController.cs",
+              "RelativeToolTip": "Controllers\\ContactController.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAgwCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T12:52:30.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ContactModel.cs",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\Data\\ContactModel.cs",
+              "RelativeDocumentMoniker": "Data\\ContactModel.cs",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\Data\\ContactModel.cs",
+              "RelativeToolTip": "Data\\ContactModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T12:48:28.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects\\C#\\AddressBook\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Projects\\C#\\AddressBook\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T12:30:20.192Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

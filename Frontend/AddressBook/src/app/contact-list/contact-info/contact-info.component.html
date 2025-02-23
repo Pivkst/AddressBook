@@ -1,0 +1,42 @@
+<div class="contact-container" id="popup">
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="inputName" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputFirstName"
+        formControlName="firstName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputName" class="form-label">Last name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputLastName"
+        formControlName="lastName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputNumber" class="form-label">PhoneNumber</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputNumber"
+        formControlName="phoneNumber"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="inputAddress" class="form-label">Address</label>
+      <input
+        type="address"
+        class="form-control"
+        id="inputAddress"
+        formControlName="address"
+      />
+    </div>
+    <button class="btn btn-primary" (click)="close()">Close</button>
+  </form>
+</div>
+>

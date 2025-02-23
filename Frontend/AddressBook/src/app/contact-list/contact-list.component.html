@@ -1,4 +1,4 @@
-<div class="table-container">
+<div *ngIf="!contactPopupVisible" class="list-container">
   <form>
     <div class="mb-3 row">
       <label
@@ -20,11 +20,14 @@
     <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Number</th>
+        <th scope="col">Phone Number</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let contact of contacts">
+      <tr
+        *ngFor="let contact of contacts"
+        (click)="showContact(contact.id ?? 0)"
+      >
         <td>{{ contact.firstName }} {{ contact.lastName }}</td>
         <td>{{ contact.phoneNumber }}</td>
       </tr>
@@ -39,3 +42,8 @@
   >
   </ngb-pagination>
 </div>
+<app-contact-info
+  *ngIf="contactPopupVisible"
+  [id]="selectedContactId"
+  (closed)="hideContact()"
+/>

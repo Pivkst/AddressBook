@@ -15,16 +15,24 @@ export class ContactService {
     if (search) {
       search = '/search/' + search;
     }
-    const data = await fetch(
+    const response = await fetch(
       `${this.url}Contact${search}?pageindex=${pageIndex}&pagesize=${pageSize}`
     );
-    let jayson = (await data.json()) ?? [];
+    let jayson = (await response.json()) ?? [];
     return jayson;
   }
 
   async getContactById(id: number): Promise<Contact> {
-    const data = await fetch(`${this.url}Contact/${id}`);
-    return (await data.json()) ?? {};
+    const response = await fetch(`${this.url}Contact/${id}`);
+    if (response.ok) return (await response.json()) ?? {};
+    else
+      return {
+        id: 0,
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        address: '',
+      };
   }
   constructor() {}
 }

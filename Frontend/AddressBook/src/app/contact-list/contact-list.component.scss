@@ -1,5 +1,9 @@
-.table-container {
+.list-container {
   width: 500px;
   height: auto;
   margin: 50px;
+}
+
+table tbody tr {
+  cursor: pointer;
 }

@@ -76,12 +76,6 @@ namespace AddressBook.Controllers
         public bool Valid => FirstName is null && Lastname is null && Address is null && PhoneNumber is null;
     }
 
-    public class ContactSearchDTO : ContactDTO
-    {
-        public int? pageIndex { get; set; }
-        public int? pageSize { get; set; }
-    }
-
     public class PaginatedContactsDTO
     {
         public List<ContactDTO> Result { get; set; } = [];

@@ -13,7 +13,7 @@ namespace AddressBook.Data
             {
                 Id = 1,
                 FirstName = "Bob",
-                Lastname = "Jognson",
+                LastName = "Jognson",
                 Address = "urmomshouse",
                 PhoneNumber = "0"
             });

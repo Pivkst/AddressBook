@@ -2,6 +2,7 @@
 using AddressBook.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,7 +39,7 @@ namespace AddressBook.Controllers
             // Search contacts by all attributes with pagination
             var queryable = _context.Contacts.Where(a =>
                 a.FirstName.Contains(query) ||
-                a.Lastname.Contains(query) ||
+                a.LastName.Contains(query) ||
                 a.Address.Contains(query) ||
                 a.PhoneNumber.Contains(query))
                 .Select(a => ContactDTO.FromModel(a));
@@ -87,6 +88,7 @@ namespace AddressBook.Controllers
         public async Task<ActionResult<ContactValidation>> Validate([FromBody] ContactDTO requestContact)
         {
             if (requestContact is null) return BadRequest();
+            requestContact.Id = -1; //Ensure id doesn't affect logic
             var validation = await requestContact.Validate(_context);
             return Ok(validation);
         }
@@ -97,10 +99,10 @@ namespace AddressBook.Controllers
             var contact = await _context.Contacts.FindAsync(id);
             if (contact is null) return NotFound();
 
-            contact.FirstName = requestContact.FirstName ?? contact.FirstName;
-            contact.Lastname = requestContact.LastName ?? contact.Lastname;
-            contact.Address = requestContact.Address ?? contact.Address;
-            contact.PhoneNumber = requestContact.PhoneNumber ?? contact.PhoneNumber;
+            contact.FirstName = !requestContact.FirstName.IsNullOrEmpty() ? requestContact.FirstName : contact.FirstName;
+            contact.LastName = !requestContact.LastName.IsNullOrEmpty() ? requestContact.LastName : contact.LastName;
+            contact.Address = !requestContact.Address.IsNullOrEmpty() ? requestContact.Address : contact.Address;
+            contact.PhoneNumber = !requestContact.PhoneNumber.IsNullOrEmpty() ? requestContact.PhoneNumber : contact.PhoneNumber;
 
             var validation = await ContactDTO.FromModel(contact).Validate(_context);
             if (!validation.Valid) return BadRequest(validation);

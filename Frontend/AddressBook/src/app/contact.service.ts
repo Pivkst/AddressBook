@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Contact, PaginatedContacts } from './contact-list/contact';
+import {
+  Contact,
+  ContactValidation,
+  PaginatedContacts,
+} from './contact-list/contact';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService {
   url = 'https://localhost:7054/api/';
+
+  constructor() {}
 
   async getAllContacts(
     pageIndex: number,
@@ -34,5 +40,16 @@ export class ContactService {
         address: '',
       };
   }
-  constructor() {}
+
+  async putContact(contact: Contact): Promise<ContactValidation | undefined> {
+    const response = await fetch(`${this.url}Contact/${contact.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contact),
+    });
+    if (response.ok) return undefined;
+    else return await response.json();
+  }
 }

@@ -18,7 +18,7 @@ namespace AddressBook.Controllers
             {
                 Id = model.Id,
                 FirstName = model.FirstName,
-                LastName = model.Lastname,
+                LastName = model.LastName,
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber
             };
@@ -32,7 +32,7 @@ namespace AddressBook.Controllers
                 return (new ContactModel
                 {
                     FirstName = FirstName ?? string.Empty,
-                    Lastname = LastName ?? string.Empty,
+                    LastName = LastName ?? string.Empty,
                     Address = Address ?? string.Empty,
                     PhoneNumber = PhoneNumber ?? string.Empty
                 }, validation);
@@ -56,7 +56,8 @@ namespace AddressBook.Controllers
                 if (!int.TryParse(PhoneNumber, out int _)) error.PhoneNumber = "Must be a number";
                 else
                 {
-                    if (await context.Contacts.Where(c => c.PhoneNumber == PhoneNumber).SingleOrDefaultAsync() is not null)
+                    var sameNumberContact = await context.Contacts.Where(c => c.PhoneNumber == PhoneNumber).SingleOrDefaultAsync();
+                    if (sameNumberContact is not null && sameNumberContact.Id != Id)
                     {
                         error.PhoneNumber = "Duplicate phone number";
                     }

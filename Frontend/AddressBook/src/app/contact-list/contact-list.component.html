@@ -45,5 +45,6 @@
 <app-contact-info
   *ngIf="contactPopupVisible"
   [id]="selectedContactId"
-  (closed)="hideContact()"
+  (onClosed)="hideContact()"
+  (onChange)="refreshContacts()"
 />

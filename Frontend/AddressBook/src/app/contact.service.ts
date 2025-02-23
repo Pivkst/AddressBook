@@ -31,14 +31,7 @@ export class ContactService {
   async getContactById(id: number): Promise<Contact> {
     const response = await fetch(`${this.url}Contact/${id}`);
     if (response.ok) return (await response.json()) ?? {};
-    else
-      return {
-        id: 0,
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
-        address: '',
-      };
+    else throw new Error(response.status.toString());
   }
 
   async putContact(contact: Contact): Promise<ContactValidation | undefined> {

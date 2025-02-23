@@ -5,11 +5,14 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { ContactService } from '../../contact.service';
 import { Contact } from '../contact';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-contact-info',
@@ -21,6 +24,7 @@ export class ContactInfoComponent {
   @Input() id: number = 0;
   @Output() onClosed = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<void>();
+  @ViewChild('errorModal') errorModal: ElementRef | undefined;
   form = new FormGroup({
     firstName: new FormControl('', { nonNullable: true }),
     lastName: new FormControl('', { nonNullable: true }),
@@ -29,21 +33,28 @@ export class ContactInfoComponent {
   });
   contactService: ContactService = inject(ContactService);
   editing: boolean = false;
-  constructor() {
+  errorMessage: string = '';
+
+  constructor(private modalService: NgbModal) {
     this.form.disable();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['id']) {
-      this.contactService.getContactById(this.id).then((contact: Contact) => {
-        this.form.setValue({
-          firstName: contact.firstName,
-          lastName: contact.lastName,
-          phoneNumber: contact.phoneNumber,
-          address: contact.address,
+      this.contactService
+        .getContactById(this.id)
+        .then((contact: Contact) => {
+          this.form.setValue({
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            phoneNumber: contact.phoneNumber,
+            address: contact.address,
+          });
+          this.form.markAsPristine();
+        })
+        .catch((reason) => {
+          this.showError(reason.toString());
         });
-        this.form.markAsPristine();
-      });
     }
   }
 
@@ -78,11 +89,22 @@ export class ContactInfoComponent {
           this.stopEditing();
           this.close();
           this.onChange.emit();
+        } else {
+          if (response.phoneNumber) this.showError(response.phoneNumber);
         }
+      })
+      .catch((reason) => {
+        this.showError(reason.toString());
       });
   }
+
   stopEditing() {
     this.form.disable();
     this.editing = false;
+  }
+
+  showError(errorMessage: string) {
+    this.errorMessage = errorMessage;
+    this.modalService.open(this.errorModal);
   }
 }

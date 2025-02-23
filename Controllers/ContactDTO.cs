@@ -1,4 +1,5 @@
 ﻿using AddressBook.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AddressBook.Controllers
@@ -7,7 +8,7 @@ namespace AddressBook.Controllers
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
-        public string? Lastname { get; set; }
+        public string? LastName { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
 
@@ -17,21 +18,21 @@ namespace AddressBook.Controllers
             {
                 Id = model.Id,
                 FirstName = model.FirstName,
-                Lastname = model.Lastname,
+                LastName = model.Lastname,
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber
             };
         }
 
-        public (ContactModel?, ContactValidation) ToModel()
+        public async Task<(ContactModel?, ContactValidation)> ToModel(AddressBookDbContext context)
         {
-            ContactValidation validation = Validate();
+            ContactValidation validation = await Validate(context);
             if (validation.Valid)
             {
                 return (new ContactModel
                 {
                     FirstName = FirstName ?? string.Empty,
-                    Lastname = Lastname ?? string.Empty,
+                    Lastname = LastName ?? string.Empty,
                     Address = Address ?? string.Empty,
                     PhoneNumber = PhoneNumber ?? string.Empty
                 }, validation);
@@ -41,16 +42,26 @@ namespace AddressBook.Controllers
             }
         }
 
-        public ContactValidation Validate()
+        public  async Task<ContactValidation> Validate(AddressBookDbContext context)
         {
             ContactValidation error = new ContactValidation();
 
             if(FirstName.IsNullOrEmpty()) error.FirstName = "Required";
-            if(Lastname.IsNullOrEmpty()) error.Lastname = "Required";
+            if(LastName.IsNullOrEmpty()) error.Lastname = "Required";
             if(Address.IsNullOrEmpty()) error.Address = "Required";
 
-            if(PhoneNumber.IsNullOrEmpty()) error.PhoneNumber = "Required";
-            else if(!int.TryParse(PhoneNumber, out int _)) error.PhoneNumber = "Must be a number";
+            if (PhoneNumber.IsNullOrEmpty()) error.PhoneNumber = "Required";
+            else
+            {
+                if (!int.TryParse(PhoneNumber, out int _)) error.PhoneNumber = "Must be a number";
+                else
+                {
+                    if (await context.Contacts.Where(c => c.PhoneNumber == PhoneNumber).SingleOrDefaultAsync() is not null)
+                    {
+                        error.PhoneNumber = "Duplicate phone number";
+                    }
+                }
+            }
 
             return error;
         }
@@ -69,5 +80,11 @@ namespace AddressBook.Controllers
     {
         public int? pageIndex { get; set; }
         public int? pageSize { get; set; }
+    }
+
+    public class PaginatedContactsDTO
+    {
+        public List<ContactDTO> Result { get; set; } = [];
+        public int Total { get; set; }
     }
 }

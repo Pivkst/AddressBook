@@ -1,0 +1,41 @@
+<div class="table-container">
+  <form>
+    <div class="mb-3 row">
+      <label
+        for="table-filtering-search"
+        class="col-xs-3 col-sm-auto col-form-label"
+        >Search:</label
+      >
+      <div class="col-xs-3 col-sm-auto">
+        <input
+          id="table-filtering-search"
+          class="form-control"
+          type="text"
+          [formControl]="filter"
+        />
+      </div>
+    </div>
+  </form>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.firstName }} {{ contact.lastName }}</td>
+        <td>{{ contact.phoneNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination
+    *ngIf="pageSize < collectionSize"
+    [collectionSize]="collectionSize"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="refreshContacts()"
+  >
+  </ngb-pagination>
+</div>

@@ -6,17 +6,16 @@ import {
   EventEmitter,
   SimpleChanges,
   ViewChild,
-  ElementRef,
 } from '@angular/core';
 import { ContactService } from '../../contact.service';
-import { Contact } from '../contact';
+import { Contact, ContactValidation } from '../contact';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorModalComponent } from '../../error-modal/error-modal.component';
 
 @Component({
   selector: 'app-contact-info',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ErrorModalComponent],
   templateUrl: './contact-info.component.html',
   styleUrl: './contact-info.component.scss',
 })
@@ -24,7 +23,7 @@ export class ContactInfoComponent {
   @Input() id: number = 0;
   @Output() onClosed = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<void>();
-  @ViewChild('errorModal') errorModal: ElementRef | undefined;
+  @ViewChild(ErrorModalComponent) errorModal!: ErrorModalComponent;
   form = new FormGroup({
     firstName: new FormControl('', { nonNullable: true }),
     lastName: new FormControl('', { nonNullable: true }),
@@ -34,8 +33,21 @@ export class ContactInfoComponent {
   contactService: ContactService = inject(ContactService);
   editing: boolean = false;
   errorMessage: string = '';
+  validation: ContactValidation = {
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    address: '',
+    valid: true,
+  };
+  oldContactInfo: {
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    phoneNumber?: string | undefined;
+    address?: string | undefined;
+  } = {};
 
-  constructor(private modalService: NgbModal) {
+  constructor() {
     this.form.disable();
   }
 
@@ -53,7 +65,7 @@ export class ContactInfoComponent {
           this.form.markAsPristine();
         })
         .catch((reason) => {
-          this.showError(reason.toString());
+          this.errorModal.show(reason.toString());
         });
     }
   }
@@ -63,6 +75,7 @@ export class ContactInfoComponent {
   }
 
   edit() {
+    this.oldContactInfo = { ...this.form.value };
     this.form.enable();
     this.editing = true;
   }
@@ -71,18 +84,10 @@ export class ContactInfoComponent {
     this.contactService
       .putContact({
         id: this.id,
-        firstName: this.form.controls.firstName.dirty
-          ? this.form.value.firstName ?? ''
-          : '',
-        lastName: this.form.controls.lastName.dirty
-          ? this.form.value.lastName ?? ''
-          : '',
-        phoneNumber: this.form.controls.phoneNumber.dirty
-          ? this.form.value.phoneNumber ?? ''
-          : '',
-        address: this.form.controls.address.dirty
-          ? this.form.value.address ?? ''
-          : '',
+        firstName: this.form.value.firstName ?? '',
+        lastName: this.form.value.lastName ?? '',
+        phoneNumber: this.form.value.phoneNumber ?? '',
+        address: this.form.value.address ?? '',
       })
       .then((response) => {
         if (response === undefined) {
@@ -90,21 +95,29 @@ export class ContactInfoComponent {
           this.close();
           this.onChange.emit();
         } else {
-          if (response.phoneNumber) this.showError(response.phoneNumber);
+          this.validation = response;
         }
       })
       .catch((reason) => {
-        this.showError(reason.toString());
+        this.errorModal.show(reason.toString());
       });
   }
 
   stopEditing() {
+    this.form.setValue({
+      firstName: this.oldContactInfo.firstName ?? '',
+      lastName: this.oldContactInfo.lastName ?? '',
+      phoneNumber: this.oldContactInfo.phoneNumber ?? '',
+      address: this.oldContactInfo.address ?? '',
+    });
+    this.validation = {
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      address: '',
+      valid: true,
+    };
     this.form.disable();
     this.editing = false;
-  }
-
-  showError(errorMessage: string) {
-    this.errorMessage = errorMessage;
-    this.modalService.open(this.errorModal);
   }
 }

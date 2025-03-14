@@ -94,15 +94,15 @@ namespace AddressBook.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ContactDTO>> Put(int id, [FromBody]ContactDTO requestContact)
+        public async Task<ActionResult> Put(int id, [FromBody]ContactDTO requestContact)
         {
             var contact = await _context.Contacts.FindAsync(id);
             if (contact is null) return NotFound();
 
-            contact.FirstName = !requestContact.FirstName.IsNullOrEmpty() ? requestContact.FirstName : contact.FirstName;
-            contact.LastName = !requestContact.LastName.IsNullOrEmpty() ? requestContact.LastName : contact.LastName;
-            contact.Address = !requestContact.Address.IsNullOrEmpty() ? requestContact.Address : contact.Address;
-            contact.PhoneNumber = !requestContact.PhoneNumber.IsNullOrEmpty() ? requestContact.PhoneNumber : contact.PhoneNumber;
+            contact.FirstName = requestContact.FirstName ?? "";
+            contact.LastName = requestContact.LastName ?? "";
+            contact.Address = requestContact.Address ?? "";
+            contact.PhoneNumber = requestContact.PhoneNumber ?? "";
 
             var validation = await ContactDTO.FromModel(contact).Validate(_context);
             if (!validation.Valid) return BadRequest(validation);

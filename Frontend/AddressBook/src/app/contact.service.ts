@@ -24,8 +24,7 @@ export class ContactService {
     const response = await fetch(
       `${this.url}Contact${search}?pageindex=${pageIndex}&pagesize=${pageSize}`
     );
-    let jayson = (await response.json()) ?? [];
-    return jayson;
+    return (await response.json()) ?? [];
   }
 
   async getContactById(id: number): Promise<Contact> {
@@ -43,6 +42,7 @@ export class ContactService {
       body: JSON.stringify(contact),
     });
     if (response.ok) return undefined;
-    else return await response.json();
+    else if (response.status == 400) return await response.json();
+    else throw new Error(response.status.toString());
   }
 }

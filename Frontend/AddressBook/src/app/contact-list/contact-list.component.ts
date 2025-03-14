@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { Contact, PaginatedContacts } from './contact';
 import { ContactService } from '../contact.service';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { ErrorModalComponent } from '../error-modal/error-modal.component';
 
 @Component({
   selector: 'app-contact-list',
@@ -14,11 +15,13 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
     NgbPaginationModule,
     ReactiveFormsModule,
     ContactInfoComponent,
+    ErrorModalComponent,
   ],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss',
 })
 export class ContactListComponent {
+  @ViewChild(ErrorModalComponent) errorModal!: ErrorModalComponent;
   contacts: Contact[] = [];
   contactService: ContactService = inject(ContactService);
   page = 1;
@@ -46,6 +49,9 @@ export class ContactListComponent {
       .then((contacts: PaginatedContacts) => {
         this.contacts = contacts.result;
         this.collectionSize = contacts.total;
+      })
+      .catch((error) => {
+        this.errorModal.show(error.toString());
       });
   }
 

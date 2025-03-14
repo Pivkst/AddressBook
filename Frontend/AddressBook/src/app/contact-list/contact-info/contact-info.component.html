@@ -7,7 +7,11 @@
         class="form-control"
         id="inputFirstName"
         formControlName="firstName"
+        [class.is-invalid]="validation.firstName"
       />
+      <div *ngIf="validation.firstName" class="invalid-feedback">
+        {{ validation.firstName }}
+      </div>
     </div>
     <div class="mb-3">
       <label for="inputName" class="form-label">Last name</label>
@@ -16,7 +20,11 @@
         class="form-control"
         id="inputLastName"
         formControlName="lastName"
+        [class.is-invalid]="validation.lastName"
       />
+      <div *ngIf="validation.lastName" class="invalid-feedback">
+        {{ validation.lastName }}
+      </div>
     </div>
     <div class="mb-3">
       <label for="inputNumber" class="form-label">PhoneNumber</label>
@@ -25,7 +33,11 @@
         class="form-control"
         id="inputNumber"
         formControlName="phoneNumber"
+        [class.is-invalid]="validation.phoneNumber"
       />
+      <div *ngIf="validation.phoneNumber" class="invalid-feedback">
+        {{ validation.phoneNumber }}
+      </div>
     </div>
     <div class="mb-3">
       <label for="inputAddress" class="form-label">Address</label>
@@ -34,7 +46,11 @@
         class="form-control"
         id="inputAddress"
         formControlName="address"
+        [class.is-invalid]="validation.address"
       />
+      <div *ngIf="validation.address" class="invalid-feedback">
+        {{ validation.address }}
+      </div>
     </div>
     <button class="btn btn-secondary" (click)="close()">Close</button>
     <button *ngIf="!editing" class="btn btn-primary" (click)="edit()">
@@ -48,20 +64,4 @@
     </button>
   </form>
 </div>
-<ng-template #errorModal let-modal>
-  <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Server Error</h1>
-    <button
-      type="button"
-      class="btn-close"
-      (click)="modal.close()"
-      aria-label="Close"
-    ></button>
-  </div>
-  <div class="modal-body">{{ errorMessage }}</div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.close()">
-      Close
-    </button>
-  </div>
-</ng-template>
+<app-error-modal />

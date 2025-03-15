@@ -12,10 +12,16 @@ import { Contact, ContactValidation } from '../contact';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ErrorModalComponent } from '../../error-modal/error-modal.component';
+import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-contact-info',
-  imports: [ReactiveFormsModule, CommonModule, ErrorModalComponent],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    ErrorModalComponent,
+    ConfirmModalComponent,
+  ],
   templateUrl: './contact-info.component.html',
   styleUrl: './contact-info.component.scss',
 })
@@ -24,6 +30,7 @@ export class ContactInfoComponent {
   @Output() onClosed = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<void>();
   @ViewChild(ErrorModalComponent) errorModal!: ErrorModalComponent;
+  @ViewChild(ConfirmModalComponent) confirmDeleteModal!: ConfirmModalComponent;
   form = new FormGroup({
     firstName: new FormControl('', { nonNullable: true }),
     lastName: new FormControl('', { nonNullable: true }),
@@ -119,5 +126,21 @@ export class ContactInfoComponent {
     };
     this.form.disable();
     this.editing = false;
+  }
+
+  showDeleteModal() {
+    this.confirmDeleteModal.show('This cannot be undone.');
+  }
+
+  deleteContact() {
+    this.contactService
+      .deleteContact(this.id)
+      .then(() => {
+        this.onChange.emit();
+        this.close();
+      })
+      .catch((reason) => {
+        this.errorModal.show(reason.toString());
+      });
   }
 }

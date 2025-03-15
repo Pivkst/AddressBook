@@ -45,4 +45,10 @@ export class ContactService {
     else if (response.status == 400) return await response.json();
     else throw new Error(response.status.toString());
   }
+
+  async deleteContact(id: number): Promise<void> {
+    const response = await fetch(`${this.url}Contact/${id}`, {
+      method: 'DELETE',
+    });
+  }
 }

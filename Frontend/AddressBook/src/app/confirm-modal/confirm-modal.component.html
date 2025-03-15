@@ -1,0 +1,24 @@
+<ng-template #confirmModal let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h1>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.close()"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div *ngIf="warningMessage" class="modal-body">{{ warningMessage }}</div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="confirm(); modal.close()"
+    >
+      Yes
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">
+      No
+    </button>
+  </div>
+</ng-template>

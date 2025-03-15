@@ -62,6 +62,10 @@
     <button *ngIf="editing" class="btn btn-secondary" (click)="stopEditing()">
       Cancel
     </button>
+    <button *ngIf="!editing" class="btn btn-danger" (click)="showDeleteModal()">
+      Delete
+    </button>
   </form>
 </div>
 <app-error-modal />
+<app-confirm-modal (onConfirm)="deleteContact()" />

@@ -7,6 +7,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { ErrorModalComponent } from '../error-modal/error-modal.component';
+import { ContactCreateComponent } from './contact-create/contact-create.component';
 
 @Component({
   selector: 'app-contact-list',
@@ -16,6 +17,7 @@ import { ErrorModalComponent } from '../error-modal/error-modal.component';
     ReactiveFormsModule,
     ContactInfoComponent,
     ErrorModalComponent,
+    ContactCreateComponent,
   ],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss',
@@ -31,7 +33,8 @@ export class ContactListComponent {
   filterValue = '';
 
   selectedContactId = 0;
-  contactPopupVisible = false;
+  contactInfoVisible = false;
+  contactCreateVisible = false;
 
   constructor() {
     this.refreshContacts();
@@ -55,12 +58,20 @@ export class ContactListComponent {
       });
   }
 
-  showContact(id: number) {
+  showContactInfo(id: number) {
     this.selectedContactId = id;
-    this.contactPopupVisible = true;
+    this.contactInfoVisible = true;
   }
 
-  hideContact() {
-    this.contactPopupVisible = false;
+  hideContactInfo() {
+    this.contactInfoVisible = false;
+  }
+
+  showContactCreate() {
+    this.contactCreateVisible = true;
+  }
+
+  hideContactCreate() {
+    this.contactCreateVisible = false;
   }
 }

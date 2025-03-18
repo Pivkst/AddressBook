@@ -39,7 +39,6 @@ export class ContactInfoComponent {
   });
   contactService: ContactService = inject(ContactService);
   editing: boolean = false;
-  errorMessage: string = '';
   validation: ContactValidation = {
     firstName: '',
     lastName: '',

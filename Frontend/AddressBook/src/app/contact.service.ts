@@ -9,7 +9,7 @@ import {
   providedIn: 'root',
 })
 export class ContactService {
-  url = 'https://localhost:7054/api/';
+  url = 'https://localhost:7054/api/'; //TODO move to env
 
   constructor() {}
 
@@ -42,12 +42,27 @@ export class ContactService {
       body: JSON.stringify(contact),
     });
     if (response.ok) return undefined;
+    // If the arguments are bad, response will be ContactValidation
+    else if (response.status == 400) return await response.json();
+    else throw new Error(response.status.toString());
+  }
+
+  async postContact(contact: Contact): Promise<ContactValidation | undefined> {
+    const response = await fetch(`${this.url}Contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contact),
+    });
+    if (response.ok) return undefined;
+    // If the arguments are bad, response will be ContactValidation
     else if (response.status == 400) return await response.json();
     else throw new Error(response.status.toString());
   }
 
   async deleteContact(id: number): Promise<void> {
-    const response = await fetch(`${this.url}Contact/${id}`, {
+    await fetch(`${this.url}Contact/${id}`, {
       method: 'DELETE',
     });
   }

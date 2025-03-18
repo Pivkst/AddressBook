@@ -1,21 +1,31 @@
-<div *ngIf="!contactPopupVisible" class="list-container">
-  <form>
-    <div class="mb-3 row">
-      <label
-        for="table-filtering-search"
-        class="col-xs-3 col-sm-auto col-form-label"
-        >Search:</label
-      >
-      <div class="col-xs-3 col-sm-auto">
-        <input
-          id="table-filtering-search"
-          class="form-control"
-          type="text"
-          [formControl]="filter"
-        />
+<div
+  *ngIf="!contactInfoVisible && !contactCreateVisible"
+  class="list-container"
+>
+  <div class="mb-3 row">
+    <form class="col-auto">
+      <div class="row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Search:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter"
+          />
+        </div>
       </div>
+    </form>
+    <div class="col"><!--fill space between elements--></div>
+    <div class="col-sm-auto">
+      <button class="btn btn-primary" (click)="showContactCreate()">+</button>
     </div>
-  </form>
+  </div>
+
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -26,7 +36,7 @@
     <tbody>
       <tr
         *ngFor="let contact of contacts"
-        (click)="showContact(contact.id ?? 0)"
+        (click)="showContactInfo(contact.id ?? 0)"
       >
         <td>{{ contact.firstName }} {{ contact.lastName }}</td>
         <td>{{ contact.phoneNumber }}</td>
@@ -43,9 +53,14 @@
   </ngb-pagination>
 </div>
 <app-contact-info
-  *ngIf="contactPopupVisible"
+  *ngIf="contactInfoVisible"
   [id]="selectedContactId"
-  (onClosed)="hideContact()"
+  (onClosed)="hideContactInfo()"
   (onChange)="refreshContacts()"
+/>
+<app-contact-create
+  *ngIf="contactCreateVisible"
+  (onClosed)="hideContactCreate()"
+  (onCreated)="refreshContacts()"
 />
 <app-error-modal />

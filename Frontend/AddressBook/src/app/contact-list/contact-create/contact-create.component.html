@@ -52,28 +52,10 @@
         {{ validation.address }}
       </div>
     </div>
-    <button class="btn btn-secondary me-2 px-4" (click)="close()">Close</button>
-    <button *ngIf="!editing" class="btn btn-primary me-2 px-4" (click)="edit()">
-      Edit
-    </button>
-    <button *ngIf="editing" class="btn btn-primary me-2 px-4" (click)="save()">
-      Save
-    </button>
-    <button
-      *ngIf="editing"
-      class="btn btn-secondary me-2 px-4"
-      (click)="stopEditing()"
-    >
+    <button class="btn btn-primary me-2 px-4" (click)="save()">Save</button>
+    <button class="btn btn-secondary me-2 px-4" (click)="cancel()">
       Cancel
-    </button>
-    <button
-      *ngIf="!editing"
-      class="btn btn-danger me-2 px-4"
-      (click)="showDeleteModal()"
-    >
-      Delete
     </button>
   </form>
 </div>
 <app-error-modal />
-<app-confirm-modal (onConfirm)="deleteContact()" />

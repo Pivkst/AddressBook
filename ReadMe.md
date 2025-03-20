@@ -16,7 +16,7 @@ The frontend should have a list view with server-side search and pagination, a s
 
 1. Download and install MS SQL Server Express version from https://www.microsoft.com/en-us/sql-server/sql-server-downloads, copy the connection string when done
 2. Open AddressBook solution in Visual Studio
-3. Put the connection string in appsettings.json ( don't overwrite `TrustServerCertificate=true` )
+3. Put the connection string in **appsettings.json** ( don't overwrite `TrustServerCertificate=true` )
 4. Open up Package Manager Console in View->Other Windows (make sure default project is AddressBook) and run:
 
 ```
@@ -31,3 +31,40 @@ Update-Database
 1. Download and install [NodeJS](https://nodejs.org/en/download)
 2. Install the Angular CLI with `npm install -g @angular/cli@17`
 3. Navigate to Frontend/AddressBook/ and run `ng serve`
+
+## Connection strings
+
+### Backend
+
+The connection string for the database is in **appsettings.json** as mentioned above. The backend is configured to connect to an SQL server. If you want to connect to some other kind of database like SQLite you'll need to provide different options to the context in **program.cs** by modifying the line:
+
+```csharp
+builder.Services.AddDbContext<AddressBookDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AddressBookConnection")));
+```
+
+**program.cs** also contains the cors configuration, which must include the address of the frontend:
+
+```csharp
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy(name: AllowFrontendOriginsPolicy,
+    policy =>
+    {
+      policy.WithOrigins("http://localhost:4200")
+      .AllowAnyHeader()
+      .AllowAnyMethod();
+    });
+});
+```
+
+If you host the frontend somewhere other than on `localhost:4200` you'll need to modify or add a new policy for it.
+
+## Frontend
+
+The connection string for the backend is defined in **\src\app\contact.service.ts**:
+
+```ts
+export class ContactService {
+  url = 'https://localhost:7054/api/';
+```
